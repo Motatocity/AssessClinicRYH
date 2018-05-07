@@ -59,7 +59,7 @@
     </nav>
 	
 	<script>
-		$.getJSON("http://192.0.0.7/rajyindee/app/getclinic.php", function(result){
+		$.getJSON("http://172.30.10.6/rajyindee/app/getclinic.php", function(result){
 			$.each(result, function(i, field){
 				$("#sidebar-wrapper ul").append("<li>\n<a href=\"#contact\" onclick = \"setclinic('" + field.name + "');\" >" + field.name + "</a>\n</li>");
 			});
@@ -243,6 +243,7 @@
 		error: function(data){
 			console.log(data);
 			//alert('There was an error adding your comment');
+			window.location.href = "complete.html";
 		}
 	});
 		return false;
