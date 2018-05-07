@@ -56,53 +56,16 @@
             <li class="sidebar-brand">
                 <a href="#top"  onclick = $("#menu-close").click(); >เลือกแผนกประเมิน</a>
             </li>
-            <li>
-                <a href="#top" onclick = $("#menu-close").click(); ></a>
-            </li>
-            <li>
-                <a href="#about" onclick = $("#menu-close").click(); >คลินิกเบาหวานและไทรอยด์</a>
-            </li>
-            <li>
-                <a href="#services" onclick = $("#menu-close").click(); >คลินิกรักษ์หัวใจ</a>
-            </li>
-            <li>
-                <a href="#portfolio" onclick = $("#menu-close").click(); >คลินิกลูกรัก</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >คลินิกรักษ์สุขภาพ</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >ห้องฉุกเฉิน</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >ห้องกระดูกและข้อ</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >ห้องทำแผล</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >ศูนย์ส่องกล้องระบบทางเดินอาหาร</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >คลินิกมะเร็งนรีเวช</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >คลินิกผ่าตัดผ่านกล้อง</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >อายุรกรรมระบบประสาทและสมอง</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >ศูนย์ไตเทียม</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >คลินิกผิวหนัง</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >สารสนเทศ</a>
-            </li>
-        </ul>
     </nav>
+	
+	<script>
+		$.getJSON("http://192.0.0.7/rajyindee/app/getclinic.php", function(result){
+			$.each(result, function(i, field){
+				$("#sidebar-wrapper ul").append("<li>\n<a href=\"#contact\" onclick = \"setclinic('" + field.name + "');\" >" + field.name + "</a>\n</li>");
+			});
+		});
+		setclinic();
+	</script>
 
     <!-- Header -->
     <header id="top" class="header">
@@ -213,7 +176,21 @@
         
         $('.rb-rating').rating({'showCaption':true, 'stars':'3', 'min':'0', 'max':'3', 'step':'1', 'size':'xs', 'starCaptions': {0:'status:nix', 1:'status:wackelt', 2:'status:geht', 3:'status:laeuft'}});
 		
-		//var cookeieclinic = getCookie("clinic");
+	
+	function setclinic(clinic){
+        $('a').click(function(){
+            if(clinic!="")
+            {
+                document.getElementById("clinic").value = clinic;
+                $("span").text(clinic);
+                setCookie("clinic",clinic,365);
+                window.localStorage.setItem("clinic", clinic);
+            }
+        });
+		$("#menu-close").click();
+    }
+	
+	//var cookeieclinic = getCookie("clinic");
     var cookeieclinic = window.localStorage.getItem("clinic");
     document.getElementById("clinic").value = cookeieclinic;
     $("#cspan").text(cookeieclinic);
