@@ -126,6 +126,20 @@
 	
 	
 <script>
+
+	function setclinic(clinic){
+        $('a').click(function(){
+            if(clinic!="")
+            {
+                document.getElementById("clinic").value = clinic;
+                $("span").text(clinic);
+                setCookie("clinic",clinic,365);
+                window.localStorage.setItem("clinic", clinic);
+            }
+        });
+		$("#menu-close").click();
+    }
+
     jQuery(document).ready(function () {
         $("#input-21f").rating({
             starCaptions: function(val) {
@@ -175,20 +189,6 @@
         
         
         $('.rb-rating').rating({'showCaption':true, 'stars':'3', 'min':'0', 'max':'3', 'step':'1', 'size':'xs', 'starCaptions': {0:'status:nix', 1:'status:wackelt', 2:'status:geht', 3:'status:laeuft'}});
-		
-	
-	function setclinic(clinic){
-        $('a').click(function(){
-            if(clinic!="")
-            {
-                document.getElementById("clinic").value = clinic;
-                $("span").text(clinic);
-                setCookie("clinic",clinic,365);
-                window.localStorage.setItem("clinic", clinic);
-            }
-        });
-		$("#menu-close").click();
-    }
 	
 	//var cookeieclinic = getCookie("clinic");
     var cookeieclinic = window.localStorage.getItem("clinic");
