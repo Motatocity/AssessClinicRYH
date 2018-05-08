@@ -132,8 +132,8 @@
             if(clinic!="")
             {
                 document.getElementById("clinic").value = clinic;
-                $("span").text(clinic);
-                setCookie("clinic",clinic,365);
+                $("#cspan").text(clinic);
+                //setCookie("clinic",clinic,365);
                 window.localStorage.setItem("clinic", clinic);
             }
         });
